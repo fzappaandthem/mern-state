@@ -1,6 +1,7 @@
 import User from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
+import {errorHandler} from "../utils/error.js";
 
 export const signup = async (req, res, next) => {
     const {username, email, password} = req.body;
@@ -22,7 +23,7 @@ export const signin = async (req, res, next) => {
     const {email, password} = req.body;
     try {
         const user = await User.findOne({email});
-        if (!user) return next(createError(404, "Usuario no encontrado"));
+        if (!user) return next(errorHandler(404, "Usuario no encontrado"));
         if (!bcryptjs.compareSync(password, user.password)) return next(errorHandler(401, "Contraseña incorrecta"));
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
         res.cookie("access_token", token, { httpOnly: true});
