@@ -4,6 +4,7 @@ import {useDispatch} from 'react-redux';
 import {signInStart, signInSuccess, signInFailure} from '../redux/user/userSlice';
 import { useSelector } from 'react-redux';
 
+
 export default function SignIn() {
   const [formData, setFormData] = useState({});
   const {loading, error} = useSelector((state) => state.user);
@@ -19,7 +20,7 @@ export default function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(!formData.email || !formData.password){
-      setError('Todos los campos son obligatorios');
+      dispatch(signInFailure('Todos los campos son obligatorios'));
       return;
     }
     try {
