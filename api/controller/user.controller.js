@@ -30,5 +30,16 @@ export const updateUser = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-    
+}
+
+
+export const deleteUser = async (req, res, next) => {
+    if(req.user.id !== req.params.id) return next(errorHandler(401, "Sólo podes borrar tu cuenta"));
+    try {
+        await User.findByIdAndDelete(req.params.id);
+        res.clearCookie("access_token");
+        res.status(200).json("Usuario eliminado con éxito");
+    } catch (error) {
+        next(error);
+    }
 }
