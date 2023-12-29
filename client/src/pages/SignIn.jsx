@@ -68,7 +68,7 @@ export default function SignIn() {
           <span className='text-blue-700'>Crear una cuenta</span>
         </Link>
       </div>
-      {error && <p className='text-red-500 mt-5'>{error}</p>}
+      <p className='text-red-500 mt-5'>{error ? error : ''}</p>
       
     </div> 
   )
