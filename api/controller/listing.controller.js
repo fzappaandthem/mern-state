@@ -1,4 +1,5 @@
 import Listing from "../models/listing.model.js";
+import { errorHandler } from "../utils/error.js";
 
 export const createListing = async (req, res, next) => {
     try {
@@ -7,4 +8,23 @@ export const createListing = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-}
+};
+
+export const deleteListing = async (req, res, next) => {
+
+    const listing = await Listing.findById(req.params.id);
+    if(!listing){
+        return next(errorHandler(404, 'Publicación no encontrada'));
+    }
+    if(req.user.id !== listing.userRef ){
+        return next(errorHandler(401, 'Sólo podés borrar tus propias publicaciones'));
+    }
+
+    try {
+        await Listing.findByIdAndDelete(listing._id);
+        res.status(200).json('La publicación fue eliminada con éxito');
+    } catch (error) {
+        next(error);
+    }
+
+};

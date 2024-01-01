@@ -5,6 +5,7 @@ import {app} from '../firebase';
 import {deleteUserStart, updateUserFailure, updateUserStart, updateUserSuccess, deleteUserSuccess, deleteUserFailure, signOutUserStart, signOutUserFailure, signOutUserSuccess} from '../redux/user/userSlice'
 import { useDispatch } from 'react-redux';
 import {Link} from 'react-router-dom';
+import { set } from 'mongoose';
 
 export default function Profile() {
   const fileRef = useRef(null);
@@ -133,6 +134,22 @@ export default function Profile() {
     }
   }
 
+  const handleListingDelete = async (listingId) => {
+    try {
+      const res = await fetch(`/api/listing/delete/${listingId}`, {
+        method: 'DELETE',
+      })
+      const data = await res.json();
+      if(!res.ok){
+        console.log(error);
+        return;
+      }
+      setUserListings((prev)=>prev.filter((listing)=>listing._id!==listingId));
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     
     <div className='p-3 max-w-lg mx-auto'>
@@ -178,7 +195,7 @@ export default function Profile() {
               </Link>
               <Link to={`/listing/${listing._id}`} className='flex-1 text-slate-700 font-semibold hover:underline truncate'><p>{listing.name}</p></Link>
               <div className='flex flex-col items-center'>
-                <button className='text-red-700 uppercase'>delete</button>
+                <button onClick={() => handleListingDelete(listing._id)} className='text-red-700 uppercase'>delete</button>
                 <button className='text-green-700 uppercase'>edit</button>
               </div>
               
