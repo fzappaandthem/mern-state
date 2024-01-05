@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import ListingItem from './ListingItem';
 
 export default function Search() {
     const navigate = useNavigate();
@@ -80,11 +81,11 @@ export default function Search() {
             setSidebarData({...sidebarData, [e.target.id]: e.target.checked ||
                  e.target.checked === 'true' ? true : false});
         }
-        if(e.target.id === 'sort_order'){
+        if (e.target.id === 'sort_order') {
             const sort = e.target.value.split('_')[0] || 'created_at';
             const order = e.target.value.split('_')[1] || 'desc';
-            setSidebarData({...sidebarData, sort, order});
-        }
+            setSidebarData({ ...sidebarData, sort, order });
+          }
     }
 
     const handleSubmit = (e) => {
@@ -160,18 +161,33 @@ export default function Search() {
                         Ordenadar por:
                     </label>
                     <select onChange={handleChange} id="sort_order" 
-                    className='border rounded-lg p-3' defaultValue={'created_at_desc'}>
+                    className='border rounded-lg p-3' defaultValue={'createdAt_desc'}>
                         <option value='regularPrice_desc'>Precio del más alto al más bajo</option>
                         <option value='regularPrice_asc'>Precio del más bajo al más alto</option>
-                        <option value='created_desc'>Última publicación 💥</option>
-                        <option value='created_asc'>Más antiguos</option>
+                        <option value='createdAt_desc'>Última publicación 💥</option>
+                        <option value='createdAt_asc'>Más antiguos</option>
                     </select>
                 </div>
                 <button className='w-full bg-slate-700 text-white p-3 rounded-lg hover:opacity-95'>Buscar</button>
             </form>
         </div>
-        <div className="">
-            <h1 className='text-3xl font-semibold border-b p-3 text-slate-700 mt-5'>Publicaciones encontradas:</h1>
+        <div className="flex-1">
+            <h1 className='text-3xl font-semibold border-b p-3 text-slate-700 mt-5'>
+                Publicaciones encontradas:
+            </h1> 
+            <div className="p-7 flex flex-wrap gap-4">
+                {!loading && listings.length === 0 && (
+                    <p className='text-xl text-slate-700 text-center w-4'>No se encontraron resultados</p>
+                )}
+                {loading && 
+                    <p className='text-xl text-slate-700 text-center w-full'>Cargando...</p>
+                }
+                {
+                    !loading && listings && listings.map((listing) => (
+                        <ListingItem key={listing._id} listing={listing}/>
+                    ))
+                }
+            </div>
         </div>
     </div>
   )
