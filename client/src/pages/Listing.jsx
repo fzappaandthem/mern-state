@@ -115,15 +115,15 @@ export default function Listing() {
               )}
             </div>
             <p className='text-slate-800'>
-              <span className='font-semibold text-black'>Descripción - </span>
+              <span className='font-semibold text-slate-700'>Descripción - </span>
               {listing.description}
             </p>
             <ul className='text-green-900 font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6'>
               <li className='flex items-center gap-1 whitespace-nowrap '>
                 <FaBed className='text-lg' />
                 {listing.bedrooms > 1
-                  ? `${listing.bedrooms} camas `
-                  : `${listing.bedrooms} cama `}
+                  ? `${listing.bedrooms} habitaciones `
+                  : `${listing.bedrooms} habitación `}
               </li>
               <li className='flex items-center gap-1 whitespace-nowrap '>
                 <FaBath className='text-lg' />
@@ -141,7 +141,7 @@ export default function Listing() {
               </li>
             </ul>
             {currentUser && listing.userRef !== currentUser._id && !contact && (
-                <button onClick={()=>setContact(true)} className='bg-slate-700 text-white p-3 rounded-md uppercase hover:opacity-95'>Contactar propietario</button>
+                <button onClick={()=>setContact(true)} className='bg-slate-700 text-white p-3 rounded-md uppercase hover:opacity-95'>Contactar propietario/a</button>
             )}
             {contact && <Contact listing={listing}/>}
           </div>
