@@ -4,9 +4,11 @@ import { MdLocationOn } from 'react-icons/md'
 
 export default function ListingItem({listing}) {
   return (
-    <div className='bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg'>
+    <div className='bg-white shadow-md 
+    hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full sm:w-[330px]'>
         <Link to={`/listing/${listing._id}`}>
-            <img className='h-[320px] sm:h-[220px] w-full object-cover hover:scale-105 duration-300'
+            <img className='h-[320px] sm:h-[220px] w-full object-cover 
+            hover:scale-105 transition-scale duration-300'
                 src={listing.imageUrls[0] ? listing.imageUrls[0] : 'https://imageio.forbes.com/specials-images/imageserve/657b29edf09ae8354c4debba/Real-estate-agents-shake-hands-after-the-signing-of-the-contract-agreement-is/960x0.jpg'} alt='Portada de la publicación'/>
             <div className="p-3 flex flex-col gap-2 w-full mt-1">
                 <p className='text-lg font-semibold w-full sm:w-[330px] text-slate-700 truncate'>{listing.name}</p>
