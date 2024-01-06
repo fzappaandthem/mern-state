@@ -21,6 +21,12 @@ export default function About() {
         será necesario brindar trabajo de calidad a otros/as programadores/as que formen
         parte de este microemprendimiento.
       </p>
+      <p className='mb-4 text-slate-700'>
+        Ya que estás leyendo esto, te recomiendo que juegues con esta aplicación.
+        Que inicies sesión con un usuario propio o con tu cuenta de gmail, que pruebes
+        creando una publicación, editarla, ver las opciones de búsqueda, la edición
+        y eliminación de usuario, etc. Hay muchas opciones para aprovechar!
+      </p>
     </div>
   )
 }
