@@ -115,27 +115,27 @@ export default function Home() {
                     <ListingItem key={listing._id} listing={listing} />
                   ))
                 }
-        {saleListings && saleListings.length > 0 && (
-            <div className="">
-              <div className="my-3">
-                <h2 className="text-2xl font-semibold text-slate-600">Últimas propiedades a la venta</h2>
-                <Link className='text-sm text-color-800 hover:underline' to={'/search?type=sale'} >
-                  Mostrar más propiedades en venta...
-                </Link>
+          {saleListings && saleListings.length > 0 && (
+              <div className="">
+                <div className="my-3">
+                  <h2 className="text-2xl font-semibold text-slate-600">Últimas propiedades a la venta</h2>
+                  <Link className='text-sm text-color-800 hover:underline' to={'/search?type=sale'} >
+                    Mostrar más propiedades en venta...
+                  </Link>
+                </div>
+                <div className="flex flex-wrap gap-4">
+                  {
+                    saleListings.map((listing) => (
+                      <ListingItem key={listing._id} listing={listing} />
+                    ))
+                  }
+                </div>
               </div>
-              <div className="flex flex-wrap gap-4">
-                {
-                  saleListings.map((listing) => (
-                    <ListingItem key={listing._id} listing={listing} />
-                  ))
-                }
-              </div>
-            </div>
-          )}
+            )}
 
-              </div>
             </div>
-          )}
+          </div>
+        )}
       </div>
     </div>
   )
