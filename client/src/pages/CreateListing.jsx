@@ -23,7 +23,6 @@ export default function CreateListing() {
     parking: false,
     furnished: false,
   });
-  console.log(formData);
   const [uploading, setUploading] = useState(false);
   const [imageUploadError, setImageUploadError] = useState(false);
   const [error, setError] = useState(false);
@@ -35,7 +34,6 @@ export default function CreateListing() {
     });
   };
   const handleImageSubmit = (e) => {
-    console.log(formData);
     setUploading(true);
     setImageUploadError(false);
     if(files.length > 0 && files.length + formData.imageUrls.length < 7 ){

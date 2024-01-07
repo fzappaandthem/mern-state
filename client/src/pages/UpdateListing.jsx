@@ -51,7 +51,6 @@ export default function CreateListing() {
     });
   };
   const handleImageSubmit = (e) => {
-    console.log(formData);
     setUploading(true);
     setImageUploadError(false);
     if(files.length > 0 && files.length + formData.imageUrls.length < 7 ){
